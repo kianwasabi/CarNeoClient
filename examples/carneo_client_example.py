@@ -1,5 +1,5 @@
 # libary/module to interact with the CarNeo API
-from module.carneoclient import CarNeoClient
+from carneoclient import CarNeoClient
 # libary/modele to read the config.ini file (to hide the private key, don't forget to add the file to .gitignore!)
 import configparser
 
@@ -34,11 +34,30 @@ def main():
     print("Selected campagne:", campaign)
 
     # create a new project
-    new_project = {
-        "name": "Neues Projekt",
-        "description": "Beschreibung des neuen Projekts"
-    }
-    created_project = client.create_project(new_project)
+    project_data = {
+                "profile": {
+                    "description": "Leon the Lion",
+                    "name": "Leon"
+                },
+                "scope": {
+                    "expiry_date": "2024-06-25T14:51:22.388Z",
+                    "metrics": [
+                    "EU"
+                    ],
+                    "third_party_processors": [
+                        {  
+                            "city": "Hamburg",
+                            "country_code": "12345",
+                            "email": "test@test.de",
+                            "name": "Leon",
+                            "post_code": "12345",
+                            "street": "street",
+                            "street_number": "12"
+                        }
+                    ]
+                }
+                }
+    created_project = client.post_create_project(project_data)
     print("Created project:", created_project)
 
 if __name__ == '__main__':

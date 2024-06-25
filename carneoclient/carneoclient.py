@@ -29,7 +29,6 @@ class CarNeoClient:
         jwt_token = jwt.encode(payload, self.private_key, algorithm='RS256') # https://pyjwt.readthedocs.io/en/latest/
         return jwt_token 
 
-
     def post_authenticate(self):
         ''' Authenticate the client with a JSON web token at the server. 
             Stores the bearer token & expiry in the client instance.
@@ -55,7 +54,7 @@ class CarNeoClient:
         ''' Authenticate the client with the server. 
             Stores the bearer token in the client instance.
         Param: None
-        Returns: JSON encoded (UFT-8)
+        Returns: identity_info
         '''
         # curl -X 'GET'
         # 'https://api.dev.carneo.cloud/auth/own_identity' 
@@ -66,36 +65,92 @@ class CarNeoClient:
         #headers = {'accept': 'application/json', 'Authorization': self.bearer_token}
         response = requests.get(url, headers=headers)
         response.raise_for_status()
-        return response.json()
+        identity_info = response.json()
+        return identity_info
     
     def get_campaign(self, campaign_id):
         # Abruf einer einzelnen “Campaign” unter Zuhilfenahme der CampaignID
         url = f"{self.base_url}/campaigns/{campaign_id}"
+        headers = {'accept': 'application/json'}
         response = requests.get(url, headers=self._check_headers())
         response.raise_for_status()
-        return response.json()
+        # to do !
+        campaigns = []
+        return campaigns
 
     def get_campaigns(self, organization_id, project_id):
-        #Abruf der „Campaigns“ nach Organization und Project
+        '''Get all campaigns for an organization & project. 
+        Param: None
+        Returns: campaigns (dict)
+        '''
         url = f"{self.base_url}/campaigns/{organization_id}/{project_id}"
+        headers = {'accept': 'application/json'}
+        # to do !
         campaigns = []
-        cursor = None
-        while True:
-            params = {}
-            if cursor:
-                params['cursor'] = cursor
-            response = requests.get(url, headers=self._check_headers(), params=params)
-            response.raise_for_status()
-            data = response.json()
-            campaigns.extend(data['campaigns'])
-            cursor = data.get('next_cursor')
-            if not cursor:
-                break
         return campaigns
     
     def post_create_project(self, project_data):
-        # Erstellen eines „Projects“
+        ''' Creates a project at server side. 
+        Param: None
+        Returns: None
+        '''
+        #    curl -X 'POST' \
+        #   'https://api.dev.carneo.cloud/projects/3fa85f64-5717-4562-b3fc-2c963f66afa6' \
+        #   -H 'accept: application/json' \
+        #   -H 'Content-Type: application/json' \
+        #   -d '{
+        #   "profile": {
+        #     "description": "string",
+        #     "name": "string"
+        #   },
+        #   "scope": {
+        #     "expiry_date": "2024-06-25T14:51:22.388Z",
+        #     "metrics": [
+        #       "string"
+        #     ],
+        #     "third_party_processors": [
+        #       {
+        #         "city": "string",
+        #         "country_code": "string",
+        #         "email": "string",
+        #         "name": "string",
+        #         "post_code": "string",
+        #         "street": "string",
+        #         "street_number": "string"
+        #       }
+        #     ]
+        #   }
+        # }'
+        #200: {
+        #   "consent_scope": {
+        #     "expiry_date": "2024-06-25T14:52:00.107Z",
+        #     "metrics": [
+        #       "string"
+        #     ],
+        #     "third_party_processors": [
+        #       {
+        #         "city": "string",
+        #         "country_code": "string",
+        #         "email": "string",
+        #         "name": "string",
+        #         "post_code": "string",
+        #         "street": "string",
+        #         "street_number": "string"
+        #       }
+        #     ]
+        #   },
+        #   "creation_date": "2024-06-25T14:52:00.107Z",
+        #   "organization_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        #   "profile": {
+        #     "description": "string",
+        #     "name": "string"
+        #   },
+        #   "state": "ENABLED",
+        #   "project_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        # }
         url = f"{self.base_url}/projects"
-        response = requests.post(url, headers=self._check_headers(), json=project_data)
+        headers = {'accept': 'application/json', 'Content-Type': 'application/json'}
+        response = requests.post(url, headers=headers, json=project_data)
         response.raise_for_status()
-        return response.json()
+        created_project = response.json()
+        return created_project
