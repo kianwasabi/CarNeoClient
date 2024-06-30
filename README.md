@@ -14,8 +14,10 @@ Python 3 is required. Tested on MacOS 12.6.6 & Ubuntu 20.04.3 LTS. <br>
     ```bash 
     git clone -b main https://github.com/kianwasabi/CarNeoClient.git 
     ```
-2. Navigate to the directory, run the setup shell script to install dependencies & activate the venv. <br>
-    ```bash 
+2. Navigate to the directory, set permissions and run the setup shell script to install dependencies & activate the venv. <br>
+    ```bash
+    cd CarNeoClient
+    chmod 755 setup.sh
     ./setup.sh
     ``` 
     **Note:** A text file named "private_key.txt" will be created in the root directory. You can store your client's private key for the JWT token there. Please ensure to keep your keys secure, even though the .gitignore file will ignore all .txt files. 
