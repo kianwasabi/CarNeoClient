@@ -21,7 +21,7 @@ class CarNeoClient:
         logging.basicConfig(
             format='%(asctime)s %(levelname)-8s %(message)s',
             #level=logging.DEBUG,
-            datefmt='%Y-%m-%d %H:%M:%S'
+            datefmt='%H:%M:%S'
             )
     
     def _generate_jwt(self) -> str:
@@ -36,11 +36,11 @@ class CarNeoClient:
 
         # create payload for jwt
         payload = {
-            'org': self.organization_id,
-            'acc': self.account_id,
-            'key': self.public_key_id,
-            'iat': now,
-            'exp': exp
+            "org": str(self.organization_id),
+            "acc": str(self.account_id),
+            "key": str(self.public_key_id),
+            "iat": str(now),
+            "exp": str(exp)
         }
         
         # generate jwt token (see: https://pyjwt.readthedocs.io/en/latest/)
