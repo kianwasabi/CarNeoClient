@@ -7,6 +7,9 @@ ENV/
 env.bak/
 venv.bak/
 
+# Runtime
+__pycache__
+
 # specific files 
-config.ini
-test_stuff.py
+*.pem
+*.txt

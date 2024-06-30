@@ -1,20 +1,62 @@
 # CarNeo_Client
 ## Table of Contents
 1. [Introduction](#introduction)
-2. [To Dos & Plans](#to-dos-&-plans)
-3. [How To](#how-to)
+2. [How To Use](#how-to-use)
+3. [To Dos & Plans](#to-dos-&-plans)
 
 ## Introduction
+This repository contains a client application & libary for the CarNeo system to provide a minimal set of functionality to other developers. <br>
+The client application communicates with the CarNeo backend via REST mechanisms (See: https://api.dev.carneo.cloud/docs). <br>
 
-## How To
-Python 3 is required. <br>
-1. Clone this repository `git clone https://github.com/kianwasabi/CarNeo_Client.git`.
-2. Run `./setup.sh` to install all dependencies & activates the venv.
-3. Run `python3 examples/carneo_client_example.py ` to run an example client application.
+## How To Use
+Python 3 is required. Tested on MacOS 12.6.6 & Ubuntu 20.04.3 LTS. <br>
+1. Clone this repository & checkout to main branch: <br>
+    ```bash 
+    git clone -b main https://github.com/kianwasabi/CarNeo_Client.git
+    ```
+2. Navigate to the directory, run the setup shell script to install dependencies & activate the venv. <br>
+    ```bash 
+    ./setup.sh
+    ``` 
+    **Note:** A text file named "private_key.txt" will be created in the root directory. You can store your client's private key for the JWT token there. Please ensure to keep your keys secure, even though the .gitignore file will ignore all .txt files. 
 
-## 
-Tested on MacOS 12.6.6 and Ubuntu 20.04.3 LTS. <br>
-## Task
+3. Run the example client application by executing the following command: <br>
+    ```bash 
+    python3 client.py
+    ```
+
+## Project Status
+### Project Status:
+- Still in Development. Estimated: 60% done. <br>
+### To Dos: 
+- Implement: <br>
+  - [x] Authentification 
+  - [x] Check Identity 
+  - [x] Call „Campaigns“ for organization & project
+  - [x] Call specific “Campaign” by CampaignID
+  - [x] Create a „project“
+  - ([] Use .pem instead of .txt for private key)
+- Tested & Works: <br>
+  - [] Authentification
+  - [x] Check Identity
+  - [] Call „Campaigns“ for organization & project
+  - [] Call specific “Campaign” by CampaignID
+  - [] Create a „project“
+
+--> No Issue/Ticket-System in use. Specific to do's are in the code. <br>
+
+### Questions:
+Authentification: <br>
+- Requirements for JWT (auth_token)? <br>
+    - Which Encoding Method for private key?  <br>
+    - Is "key" (UUID) in init-token payload the server public-key? I need the public key for testing :) <br>
+    - "3fa85f64-5717-4562-b3fc-2c963f66afa6" (see API Doc UUID) surrficiant for testing?  <br>
+- Pragnation: 
+    - "3fa85f64-5717-4562-b3fc-2c963f66afa6" (see API Doc UUID) surrficiant for testing?  <br>
+    - Kurze Erklärung zum allgemeinem Use-Case der API: Annahme aus API Doku - Handelt es sich um eine "Auftragsverwaltung"? z.B. ein ID.Buzz Client kann mehrere (bis zu 25) Aktionen (**Campaigns**) ausführen, die dem **Project** MOIA zugeordnet sind und Teil der **Organization** Volkswagen sind?
+
+<!---
+## Notes 
 Für unser CarNEO-System stellen wir eine REST API zu Verfügung. <br>
 Für die API soll ein Client entwickelt werden, der einen Minimalumfang von Funktionalität anderen Entwicklern zur Verfügung stellt. <br>
 1. Authentifizierung
@@ -35,7 +77,7 @@ Der Client muss mit dem Private-Key einen JWT-Token erzeugen und an das Backend 
 Anschließend erhält der Client einen Token, das für die restlichen API-Calls verwendet werden kann. <br>
  
 Die Payload des Initialtokens beinhaltet die folgenden Claims:
- - „org“: Eine UUID, die einer Organisation in dem System zugeordnet ist.
+- „org“: Eine UUID, die einer Organisation in dem System zugeordnet ist.
 - „acc“: Eine UUID, die einem Account in dem System zugeordnet ist.
 - „key“: Eine UUID, die einem Public-Key in dem System zugeordnet ist.
 - „iat“: Zeitstempel der Token-Erstellung
@@ -45,19 +87,4 @@ Dieser Client soll in einer Programmiersprache Ihrer Wahl entwickelt werden. Die
  
 Eine Dokumentation der REST-API kann hier eingesehen werden: https://api.dev.carneo.cloud/docs 
 
-## To Dos
-- [x] Authentification
-- [] Authentification Test
-- [x] Method Invokation
-- [] Method Invokation Test
-- [] Pagniation
-- [] Pagniation Test
-- [] Documentation
-
-### Questions: 
-- HS256 or RS256? <br>
-- Where does the UUID come from? <br>
-- get_identiy without barer token in header? <br>
-- mhhh... „key“: Eine UUID, die einem Public-Key in dem System zugeordnet ist.
-
-
+--->
