@@ -1,4 +1,4 @@
-# CarNeo_Client
+# CarNeoClient
 ## Table of Contents
 1. [Introduction](#introduction)
 2. [How To Use](#how-to-use)
@@ -12,7 +12,7 @@ The client application communicates with the CarNeo backend via REST mechanisms 
 Python 3 is required. Tested on MacOS 12.6.6 & Ubuntu 20.04.3 LTS. <br>
 1. Clone this repository & checkout to main branch: <br>
     ```bash 
-    git clone -b main https://github.com/kianwasabi/CarNeo_Client.git
+    git clone -b main https://github.com/kianwasabi/CarNeoClient.git 
     ```
 2. Navigate to the directory, run the setup shell script to install dependencies & activate the venv. <br>
     ```bash 
