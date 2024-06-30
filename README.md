@@ -9,7 +9,7 @@ This repository contains a client application & libary for the CarNeo system to 
 The client application communicates with the CarNeo backend via REST mechanisms (See: https://api.dev.carneo.cloud/docs). <br>
 
 ## How To Use
-Python 3 is required. Tested on MacOS 12.6.6 & Ubuntu 20.04.3 LTS. <br>
+Python 3.4 or higher is required. Tested on MacOS 12.6.6 & Ubuntu 20.04.3 LTS. <br>
 1. Clone this repository & checkout to main branch: <br>
     ```bash 
     git clone -b main https://github.com/kianwasabi/CarNeoClient.git 
@@ -17,14 +17,15 @@ Python 3 is required. Tested on MacOS 12.6.6 & Ubuntu 20.04.3 LTS. <br>
 2. Navigate to the directory, set permissions and run the setup shell script to install dependencies & activate the venv. <br>
     ```bash
     cd CarNeoClient
-    chmod 755 setup.sh
+    chmod +x setup.sh
+    chmod u+rwx setup.sh
     ./setup.sh
     ``` 
     **Note:** A text file named "private_key.txt" will be created in the root directory. You can store your client's private key for the JWT token there. Please ensure to keep your keys secure, even though the .gitignore file will ignore all .txt files. 
 
 3. Run the example client application by executing the following command: <br>
     ```bash 
-    python3 client.py
+    python3 example.py
     ```
 
 ## Project Status
