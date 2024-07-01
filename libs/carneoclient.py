@@ -120,6 +120,7 @@ class CarNeoClient:
             organization_id = self.organization_id
         if cursor is None:
             url = f"{self.base_url}/campaigns/{organization_id}/{project_id}"
+            # to do: Use get_campaign_by_id here or make a single function for both
         else:
             url = f"{self.base_url}/campaigns/{organization_id}/{project_id}/?cursor={cursor}"
         headers = {'accept': 'application/json', 

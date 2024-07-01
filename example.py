@@ -46,12 +46,14 @@ def main():
     identity_info = client.get_identity() 
     print(f"-> That's me: {identity_info}")
 
+
+    ## to do/idea: Consider to make a single method for get_campaign_by_id and get_campaign_pagination
     # # Get campaigns of organization and project by it's ID.
     # campaign = client.get_campaign_by_id(project_id, campaign_id) 
     # campaign = client.get_campaign_by_id(project_id, campaign_id, "3fa85f64-5717-4562-b3fc-2c963f66afa6") # with optional organization_id
     # print(f"-> Selected campagne: {campaign}")
-
     # # Get campaigns of organization and project by pagination. 
+    ## to do/idea: cursor as array to swipe through pages e.g [1,2,10] or 1 or None should be accepted
     # campaign = client.get_campaign_pagination(project_id) # 
     # print(f"-> Selected campagne: {campaign}")
     # campaign = client.get_campaign_pagination(project_id, 1) # with optional pagination courser 
