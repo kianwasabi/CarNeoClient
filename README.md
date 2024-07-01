@@ -53,14 +53,22 @@ Python 3.4 or higher is required. Tested on MacOS 12.6.6 & Ubuntu 20.04.3 LTS. <
 --> No Issue/Ticket-System in use. Specific to do's are in the code. <br>
 
 ### Questions:
+01.07.2024
 Authentification: <br>
 - Requirements for JWT (auth_token)? <br>
     - Which Encoding Method for private key?  <br>
     - Is "key" (UUID) in init-token payload the server public-key? I need the public key for testing :) <br>
     - "3fa85f64-5717-4562-b3fc-2c963f66afa6" (see API Doc UUID) surrficiant for testing?  <br>
+    -> UUIDs haben keine spezielle Kodierung.
 - Pragnation: 
     - "3fa85f64-5717-4562-b3fc-2c963f66afa6" (see API Doc UUID) surrficiant for testing?  <br>
     - Kurze Erklärung zum allgemeinem Use-Case der API: Annahme aus API Doku - Handelt es sich um eine "Auftragsverwaltung"? z.B. ein ID.Buzz Client kann mehrere (bis zu 25) Aktionen (**Campaigns**) ausführen, die dem **Project** MOIA zugeordnet sind und Teil der **Organization** Volkswagen sind?
+    -> Ja.
+02.07.2024
+- Welches expliziten Casts brauchen die Claims? Beispiel vorliegend? 
+- Wie lautet der Public Key?
+- Mit welchem Alorithmus decodiert der Server den JWT-Token?
+
 
 <!---
 ## Notes 

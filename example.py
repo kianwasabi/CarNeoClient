@@ -39,31 +39,38 @@ def main():
     client = CarNeoClient(base_url, private_key, organization_id, account_id, public_key_id)
 
     # Authenticate the client.
-    client.authenticate() # to do! -> Check requieremnts for the JWT token.
+    print("----")
+    client.authenticate() # to do! -> Check requieremnts for the JWT claims.
+    print("----")
 
     # Get client's identity.
-    client.bearer_token = 'Bearer ey..'  # workarround due to open to dos in authenticate(): set the bearer token manually from Swagger UI
+    print("----")
+    #client.bearer_token = 'Bearer ey..' 
     identity_info = client.get_identity() 
     print(f"-> That's me: {identity_info}")
+    print("----")
 
+    # to do/idea: Consider to make a single method for get_campaign_by_id and get_campaign_pagination
+    # Get campaigns of organization and project by it's ID.
+    print("----")
+    campaign = client.get_campaign_by_id(project_id, campaign_id) 
+    campaign = client.get_campaign_by_id(project_id, campaign_id, "3fa85f64-5717-4562-b3fc-2c963f66afa6") # with optional organization_id
+    print(f"-> Selected campagne: {campaign}")
+    # Get campaigns of organization and project by pagination. 
+    # to do/idea: cursor as array to swipe through pages e.g [1,2,10] or 1 or None should be accepted
+    campaign = client.get_campaign_pagination(project_id) # 
+    print(f"-> Selected campagne: {campaign}")
+    campaign = client.get_campaign_pagination(project_id, 1) # with optional pagination courser 
+    print(f"-> Selected campagne: {campaign}")
+    campaign = client.get_campaign_pagination(project_id, 2, "3fa85f64-5717-4562-b3fc-2c963f66afa6") # with optional organization_id
+    print(f"-> Selected campagne: {campaign}")
+    print("----")
 
-    ## to do/idea: Consider to make a single method for get_campaign_by_id and get_campaign_pagination
-    # # Get campaigns of organization and project by it's ID.
-    # campaign = client.get_campaign_by_id(project_id, campaign_id) 
-    # campaign = client.get_campaign_by_id(project_id, campaign_id, "3fa85f64-5717-4562-b3fc-2c963f66afa6") # with optional organization_id
-    # print(f"-> Selected campagne: {campaign}")
-    # # Get campaigns of organization and project by pagination. 
-    ## to do/idea: cursor as array to swipe through pages e.g [1,2,10] or 1 or None should be accepted
-    # campaign = client.get_campaign_pagination(project_id) # 
-    # print(f"-> Selected campagne: {campaign}")
-    # campaign = client.get_campaign_pagination(project_id, 1) # with optional pagination courser 
-    # print(f"-> Selected campagne: {campaign}")
-    # campaign = client.get_campaign_pagination(project_id, 2, "3fa85f64-5717-4562-b3fc-2c963f66afa6") # with optional organization_id
-    # print(f"-> Selected campagne: {campaign}")
-    
-    # # Create a new project
-    # created_project = client.create_project(project_data)
-    # print("Created project:", created_project)
+    # Create a new project.
+    print("----")
+    created_project = client.create_project(project_data)
+    print("-> Created project:", created_project)
+    print("----")
 
 if __name__ == '__main__':
     try:
