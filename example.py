@@ -2,7 +2,7 @@ from libs.carneoclient import CarNeoClient
 
 def main(): 
     # Define the necessary information. 
-    base_url = "https://api.dev.carneo.cloud"               # base url of the CarNeo API
+    base_url = "https://api.dev.carneo.cloud"                # base url of the CarNeo API
     with open('private_key.txt', 'r') as file: 
         private_key = file.read()                            # example private key of the client // to do: .pem file, HS256 or RS256? 
     organization_id = "3fa85f64-5717-4562-b3fc-2c963f66afa6" # example organization UUID assigned in backend
@@ -47,22 +47,22 @@ def main():
     print("----")
     #client.bearer_token = 'Bearer ey..' 
     identity_info = client.get_identity() 
-    print(f"-> That's me: {identity_info}")
+    print(f"-> Client Identity: {identity_info}")
     print("----")
 
-    # to do/idea: Consider to make a single method for get_campaign_by_id and get_campaign_pagination
+    # to do! -> Consider to make a single method for get_campaign_by_id and get_campaign_pagination
+    # to do! -> Cursor as array to swipe through pages e.g [1,2,10] or 1 or None should be accepted
     # Get campaigns of organization and project by it's ID.
     print("----")
     campaign = client.get_campaign_by_id(project_id, campaign_id) 
-    campaign = client.get_campaign_by_id(project_id, campaign_id, "3fa85f64-5717-4562-b3fc-2c963f66afa6") # with optional organization_id
+    campaign = client.get_campaign_by_id(project_id, campaign_id, organization_id) # with optional organization_id
     print(f"-> Selected campagne: {campaign}")
     # Get campaigns of organization and project by pagination. 
-    # to do/idea: cursor as array to swipe through pages e.g [1,2,10] or 1 or None should be accepted
-    campaign = client.get_campaign_pagination(project_id) # 
+    campaign = client.get_campaign_pagination(project_id)
     print(f"-> Selected campagne: {campaign}")
     campaign = client.get_campaign_pagination(project_id, 1) # with optional pagination courser 
     print(f"-> Selected campagne: {campaign}")
-    campaign = client.get_campaign_pagination(project_id, 2, "3fa85f64-5717-4562-b3fc-2c963f66afa6") # with optional organization_id
+    campaign = client.get_campaign_pagination(project_id, 2, organization_id) # with optional organization_id & pagination courser 
     print(f"-> Selected campagne: {campaign}")
     print("----")
 
@@ -74,8 +74,8 @@ def main():
 
 if __name__ == '__main__':
     try:
-        print("------- CarNeo Client -------")
+        print("--------CarNeo Client--------")
         main()
         print("-----------------------------")
     except KeyboardInterrupt:
-        print("------- KeyboardInterrupt ------- ")
+        print("-----Keyboard Interrupt------")

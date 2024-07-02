@@ -19,6 +19,7 @@ class CarNeoClient:
             datefmt='%H:%M:%S'
             )
     
+    ### private methods ###
     def _generate_jwt(self) -> str:
         '''Generate a JSON web token for the client.
         Param: None
@@ -28,11 +29,11 @@ class CarNeoClient:
         iat = int(datetime.now(timezone.utc).timestamp()) # issued at time
         exp = iat + 3600                                  # 1 hour      
         claims = {
-            'org': self.organization_id,    # Format: '3fa85f64-5717-4562-b3fc-2c963f66afa6'
-            'acc': self.account_id,         # Format: '3fa85f64-5717-4562-b3fc-2c963f66afa6'
-            'key': self.public_key_id,      # Format: '3fa85f64-5717-4562-b3fc-2c963f66afa6'
-            'iat': iat,                     # Format: 1371720939
-            'exp': exp                      # Format: 1371720939
+            'org': self.organization_id,    # Format: '3fa85f64-5717-4562-b3fc-2c963f66afa6' (str)
+            'acc': self.account_id,         # Format: '3fa85f64-5717-4562-b3fc-2c963f66afa6' (str)
+            'key': self.public_key_id,      # Format: '3fa85f64-5717-4562-b3fc-2c963f66afa6' (str)
+            'iat': iat,                     # Format: 1371720939 (int)
+            'exp': exp                      # Format: 1371720939 (int)
         }
         try: 
             jwt_token = jwt.encode(claims, self.private_key, algorithm="HS256") 
@@ -47,12 +48,14 @@ class CarNeoClient:
         Param: None
         Returns: None
         '''
+        # parse timestamps to compare
         expiry_time = datetime.strptime(self.bearer_token_expiry, '%Y-%m-%dT%H:%M:%S.%fZ').replace(tzinfo=timezone.utc)
         current_time = datetime.now(timezone.utc)
         if ((self.bearer_token or self.bearer_token_expiry) is None) or (current_time > expiry_time): 
             logging.info("Bearer token is expired or not set. Authenticate the client.")
             self.authenticate()
-
+    
+    ### public methods ###
     def authenticate(self) -> None:
         ''' Authenticate the client with a JWT. 
         Receives and sets the client's bearer token and bearer token expiry.
@@ -102,7 +105,6 @@ class CarNeoClient:
         Param: project (str), campaign_id (str), organization_id(str) default: self.organization_id
         Returns: campaigns (dict)
         '''
-        # check if token and is not expired
         self._check_token()
         if organization_id is None: 
             organization_id = self.organization_id
