@@ -69,6 +69,8 @@ Authentification: <br>
 - Wie lautet der Public Key?
 - Mit welchem Alorithmus decodiert der Server den JWT-Token?
 
+- Pargination: Nur Vorwärts 
+
 
 <!---
 ## Notes 

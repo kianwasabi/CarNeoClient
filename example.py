@@ -45,25 +45,25 @@ def main():
 
     # Get client's identity.
     print("----")
-    #client.bearer_token = 'Bearer ey..' 
     identity_info = client.get_identity() 
     print(f"-> Client Identity: {identity_info}")
     print("----")
-
-    # to do! -> Consider to make a single method for get_campaign_by_id and get_campaign_pagination
-    # to do! -> Cursor as array to swipe through pages e.g [1,2,10] or 1 or None should be accepted
+    
     # Get campaigns of organization and project by it's ID.
     print("----")
     campaign = client.get_campaign_by_id(project_id, campaign_id) 
     campaign = client.get_campaign_by_id(project_id, campaign_id, organization_id) # with optional organization_id
     print(f"-> Selected campagne: {campaign}")
-    # Get campaigns of organization and project by pagination. 
-    campaign = client.get_campaign_pagination(project_id)
-    print(f"-> Selected campagne: {campaign}")
-    campaign = client.get_campaign_pagination(project_id, 1) # with optional pagination courser 
-    print(f"-> Selected campagne: {campaign}")
-    campaign = client.get_campaign_pagination(project_id, 2, organization_id) # with optional organization_id & pagination courser 
-    print(f"-> Selected campagne: {campaign}")
+    print("----")
+
+    # Swipe through campaigns of organization and project by pagination. 
+    print("----")
+    while True: 
+        campaign = client.get_campaign_pagination(project_id) # with optional pagination courser
+        #campaign = client.get_campaign_pagination(project_id, 2, organization_id) # with optional organization_id & pagination courser 
+        print(f"-> Selected campagne: {campaign}")
+        if ((campaign["next_cursor"] == "NULL") or (campaign["fetch_next"] == False)) :
+            break
     print("----")
 
     # Create a new project.
