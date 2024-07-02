@@ -58,11 +58,19 @@ def main():
 
     # Swipe through campaigns of organization and project by pagination. 
     print("----")
-    while True: 
-        campaign = client.get_campaign_pagination(project_id) # with optional pagination courser
-        #campaign = client.get_campaign_pagination(project_id, 2, organization_id) # with optional organization_id & pagination courser 
+    # Assuming the server indicates the end of the pagination with "NULL" and "fetch_next" = False
+    # while True: 
+    #     campaign = client.get_campaign_pagination(project_id) # with optional pagination courser
+    #     #campaign = client.get_campaign_pagination(project_id, 2, organization_id) # with optional organization_id & pagination courser 
+    #     print(f"-> Selected campagne: {campaign}")
+    #     if ((campaign["next_cursor"] == "NULL") or (campaign["fetch_next"] == False)):
+    #         break
+    # Might be a saver approach with for loop with max counter 
+    max_campaigns = 25 #max campaigns per page regarding the API documentation
+    for i in range(max_campaigns):
+        campaign = client.get_campaign_pagination(project_id)
         print(f"-> Selected campagne: {campaign}")
-        if ((campaign["next_cursor"] == "NULL") or (campaign["fetch_next"] == False)) :
+        if ((campaign["next_cursor"] == "NULL") or (campaign["fetch_next"] == False)):
             break
     print("----")
 
