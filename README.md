@@ -2,7 +2,7 @@
 ## Table of Contents
 1. [Introduction](#introduction)
 2. [How To Use](#how-to-use)
-3. [To Dos & Plans](#to-dos-&-plans)
+3. [To Dos](#to-dos-&-plans)
 
 ## Introduction
 This repository contains a client application & libary for the CarNeo system to provide a minimal set of functionality to other developers. <br>
@@ -34,24 +34,24 @@ Python 3.4 or higher is required. Tested on MacOS 12.6.6 & Ubuntu 20.04.3 LTS. <
 
 ## Project Status
 ### Project Status:
-- Still in Development. Estimated: 60% done. <br>
-### To Dos: 
-- Implement: <br>
+- Still in Development. Estimated: 75% done. <br>
+
+### To Dos:
   - [x] Authentification 
   - [x] Check Identity 
   - [x] Call „Campaigns“ for organization & project
   - [x] Call specific “Campaign” by CampaignID
   - [x] Create a „project“
-  - ([] Use .pem instead of .txt for private key)
-- Tested & Works: <br>
-  - [] Authentification
+  - [] Use .pem instead of .txt for private key
+  - [x] Authentification
   - [x] Check Identity
-  - [] Call „Campaigns“ for organization & project
-  - [] Call specific “Campaign” by CampaignID
+  - [x] Call „Campaigns“ for organization & project
+  - [x] Call specific “Campaign” by CampaignID
   - [] Create a „project“
 
---> No Issue/Ticket-System in use. Specific to do's are in the code. <br>
+**Note**: No Issue/Ticket-System in use. Specific to do's are in the code. <br>
 
+<!---
 ### Questions:
 01.07.2024
 Authentification: <br>
@@ -72,7 +72,7 @@ Authentification: <br>
 - Pargination: Nur Vorwärts 
 
 
-<!---
+
 ## Notes 
 Für unser CarNEO-System stellen wir eine REST API zu Verfügung. <br>
 Für die API soll ein Client entwickelt werden, der einen Minimalumfang von Funktionalität anderen Entwicklern zur Verfügung stellt. <br>
